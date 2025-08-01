@@ -20,14 +20,14 @@ namespace ChatRoom
             string path = $"GetUser?userName={username}";
 
             var result = await Client.GetFromJsonAsync<User>(path);
-            
+
             return result;
         }
 
-        public static async Task<User?> PostNewUser(string username)
+        public static async Task<HttpResponseMessage> PostNewUser(string username)
         {
             string path = $"PostNewUser?userName={username}";
-            var result = await Client.GetFromJsonAsync<User>(path);
+            var result = await Client.PostAsync(path, null);
             
             return result;
         }

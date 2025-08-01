@@ -31,6 +31,8 @@
             MessageBox = new TextBox();
             SendButton = new Button();
             UserOptionDropdown = new ComboBox();
+            Chat = new Label();
+            ChatBox = new ListBox();
             SuspendLayout();
             // 
             // MessageBox
@@ -60,11 +62,30 @@
             UserOptionDropdown.Text = "Select User ...";
             UserOptionDropdown.SelectedIndexChanged += UserOptionDropdown_SelectedIndexChanged;
             // 
+            // Chat
+            // 
+            Chat.AutoSize = true;
+            Chat.Location = new Point(12, 398);
+            Chat.Name = "Chat";
+            Chat.Size = new Size(0, 15);
+            Chat.TabIndex = 3;
+            // 
+            // ChatBox
+            // 
+            ChatBox.FormattingEnabled = true;
+            ChatBox.ItemHeight = 15;
+            ChatBox.Location = new Point(12, 12);
+            ChatBox.Name = "ChatBox";
+            ChatBox.Size = new Size(351, 394);
+            ChatBox.TabIndex = 5;
+            // 
             // ChatRoom
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(375, 450);
+            Controls.Add(ChatBox);
+            Controls.Add(Chat);
             Controls.Add(UserOptionDropdown);
             Controls.Add(SendButton);
             Controls.Add(MessageBox);
@@ -80,5 +101,7 @@
         private TextBox MessageBox;
         private Button SendButton;
         private ComboBox UserOptionDropdown;
+        private Label Chat;
+        private ListBox ChatBox;
     }
 }

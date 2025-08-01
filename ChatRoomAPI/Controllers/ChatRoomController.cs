@@ -11,7 +11,7 @@ namespace ChatRoomAPI.Controllers
 
         // User Get Systems:
         [HttpGet("GetUser")]
-        public User? GetUser(string userName) => users.FirstOrDefault(u => u.Username == userName);
+        public User? GetUser(string userName) => users.FirstOrDefault(u => u.Username == userName) ?? new User() { Username = string.Empty };
 
         // User Post Systems:
         [HttpPost("PostNewUser")]
@@ -21,6 +21,8 @@ namespace ChatRoomAPI.Controllers
             users.Add(user);
             return user;
         }
+        //[HttpPost("DeleteUser")]
+        //public void DeleteUser(string userName) => users.Remove(GetUser(userName));
 
         // Message Get Systems:
         [HttpGet("GetMessage")]
