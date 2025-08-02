@@ -38,20 +38,22 @@
             TabControl = new TabControl();
             AddTabButton = new Button();
             NewTabNameBox = new TextBox();
+            ShowHistoryCheck = new CheckBox();
             SuspendLayout();
             // 
             // MessageBox
             // 
             MessageBox.Enabled = false;
-            MessageBox.Location = new Point(112, 440);
+            MessageBox.Location = new Point(112, 466);
             MessageBox.Name = "MessageBox";
             MessageBox.Size = new Size(203, 23);
             MessageBox.TabIndex = 0;
+            MessageBox.TextChanged += MessageBox_TextChanged;
             // 
             // SendButton
             // 
             SendButton.Enabled = false;
-            SendButton.Location = new Point(321, 440);
+            SendButton.Location = new Point(321, 464);
             SendButton.Name = "SendButton";
             SendButton.Size = new Size(44, 23);
             SendButton.TabIndex = 1;
@@ -63,7 +65,7 @@
             // 
             UserOptionDropdown.Enabled = false;
             UserOptionDropdown.FormattingEnabled = true;
-            UserOptionDropdown.Location = new Point(12, 440);
+            UserOptionDropdown.Location = new Point(12, 464);
             UserOptionDropdown.Name = "UserOptionDropdown";
             UserOptionDropdown.Size = new Size(94, 23);
             UserOptionDropdown.TabIndex = 2;
@@ -73,7 +75,7 @@
             // Chat
             // 
             Chat.AutoSize = true;
-            Chat.Location = new Point(12, 421);
+            Chat.Location = new Point(12, 453);
             Chat.Name = "Chat";
             Chat.Size = new Size(0, 15);
             Chat.TabIndex = 3;
@@ -89,14 +91,14 @@
             ChatBox.Enabled = false;
             ChatBox.FormattingEnabled = true;
             ChatBox.ItemHeight = 15;
-            ChatBox.Location = new Point(12, 40);
+            ChatBox.Location = new Point(12, 64);
             ChatBox.Name = "ChatBox";
             ChatBox.Size = new Size(351, 394);
             ChatBox.TabIndex = 5;
             // 
             // TabControl
             // 
-            TabControl.Location = new Point(12, 12);
+            TabControl.Location = new Point(12, 37);
             TabControl.Name = "TabControl";
             TabControl.SelectedIndex = 0;
             TabControl.Size = new Size(203, 22);
@@ -106,7 +108,7 @@
             // AddTabButton
             // 
             AddTabButton.Enabled = false;
-            AddTabButton.Location = new Point(321, 12);
+            AddTabButton.Location = new Point(319, 35);
             AddTabButton.Name = "AddTabButton";
             AddTabButton.Size = new Size(44, 23);
             AddTabButton.TabIndex = 7;
@@ -116,17 +118,28 @@
             // 
             // NewTabNameBox
             // 
-            NewTabNameBox.Location = new Point(221, 12);
+            NewTabNameBox.Location = new Point(221, 36);
             NewTabNameBox.Name = "NewTabNameBox";
-            NewTabNameBox.Size = new Size(94, 23);
+            NewTabNameBox.Size = new Size(92, 23);
             NewTabNameBox.TabIndex = 8;
             NewTabNameBox.TextChanged += NewTabNameBox_TextChanged;
+            // 
+            // ShowHistoryCheck
+            // 
+            ShowHistoryCheck.AutoSize = true;
+            ShowHistoryCheck.Location = new Point(12, 12);
+            ShowHistoryCheck.Name = "ShowHistoryCheck";
+            ShowHistoryCheck.Size = new Size(145, 19);
+            ShowHistoryCheck.TabIndex = 9;
+            ShowHistoryCheck.Text = "Show Message History";
+            ShowHistoryCheck.UseVisualStyleBackColor = true;
             // 
             // ChatRoom
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(375, 475);
+            ClientSize = new Size(375, 501);
+            Controls.Add(ShowHistoryCheck);
             Controls.Add(NewTabNameBox);
             Controls.Add(AddTabButton);
             Controls.Add(TabControl);
@@ -153,5 +166,6 @@
         private TabControl TabControl;
         private Button AddTabButton;
         private TextBox NewTabNameBox;
+        private CheckBox ShowHistoryCheck;
     }
 }

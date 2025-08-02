@@ -1,4 +1,4 @@
-﻿namespace ChatRoomAPI.Models
+﻿namespace ModelObjects
 {
     public class User
     {

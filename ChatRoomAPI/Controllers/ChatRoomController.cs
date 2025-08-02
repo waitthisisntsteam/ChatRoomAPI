@@ -1,55 +1,53 @@
-﻿using ChatRoomAPI.Models;
+﻿
 using Microsoft.AspNetCore.Mvc;
+using ModelObjects;
 using System.Net;
 
 namespace ChatRoomAPI.Controllers
 {
     public class ChatRoomController : ControllerBase
     {
-        static Dictionary<string, ChatRoom> chatrooms = new Dictionary<string, ChatRoom>();
+        private static Dictionary<string, Chatroom> Chatrooms = new Dictionary<string, Chatroom>();
+        private Chatroom EmptyChatroom = new Chatroom() { Messages = new HashSet<Message>(), Users = new HashSet<User>(), IsActive = false };
+        private User EmptyUser = new User() { Username = string.Empty };
 
         // User Get Systems:
         [HttpGet("GetUser")]
         public User? GetUser(string chatRoomName, string userName)
-            => chatrooms[chatRoomName].users.FirstOrDefault(u => u.Username == userName) ?? new User() { Username = string.Empty };
-
+            => Chatrooms[chatRoomName].Users.FirstOrDefault(u => u.Username == userName) ?? EmptyUser;
+        [HttpGet("GetAllUsers")]
+        public HashSet<User> GetAllUsers(string chatRoomName)
+            => Chatrooms[chatRoomName].Users;
         // User Post Systems:
         [HttpPost("PostNewUser")]
         public User PostNewUser(string chatRoomName, string userName)
         {
             User user = new User() { Username = userName };
-            chatrooms[chatRoomName].users.Add(user);
+            Chatrooms[chatRoomName].Users.Add(user);
             return user;
         }
 
         // Message Get Systems:
-        [HttpGet("GetMessage")]
-        public Message GetMessage(string chatRoomName, int index)
-            => chatrooms[chatRoomName].messages.ElementAtOrDefault(index) ?? new Message() { Text = "No message found", Timestamp = DateTime.Now, User = new User() { Username = string.Empty } };
         [HttpGet("GetAllMessages")]
-        public List<Message> GetAllMessage(string chatRoomName)
-            => chatrooms[chatRoomName].messages;
-
-
+        public HashSet<Message> GetAllMessages(string chatRoomName)
+            => Chatrooms[chatRoomName].Messages;
         //Message Post Systems:
         [HttpPost("PostMessage")]
         public HttpResponseMessage PostMessage(string chatRoomName, string message, string username)
         {
-            chatrooms[chatRoomName].messages.Add(new Message() { Text = message, Timestamp = DateTime.Now, User = GetUser(chatRoomName, username) });
+            Chatrooms[chatRoomName].Messages.Add(new Message() { Text = message, Timestamp = DateTime.Now, User = GetUser(chatRoomName, username) });
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
         //Chatroom Get Systems:
         [HttpGet("GetChatroom")]
-        public ChatRoom? GetChatroom(string chatRoomName)
-            => !chatrooms[chatRoomName].Equals(null) ? chatrooms[chatRoomName] : null;
-        
-
+        public Chatroom? GetChatroom(string chatRoomName)
+            => Chatrooms.ContainsKey(chatRoomName) ? Chatrooms[chatRoomName] : EmptyChatroom;
         //Chatroom Post Systems:
         [HttpPost("PostNewChatroom")]
         public HttpResponseMessage PostNewChatroom(string chatRoomName)
         {
-            chatrooms.Add(chatRoomName, new ChatRoom());
+            Chatrooms.Add(chatRoomName, new Chatroom() { Messages = new(), Users = new(), IsActive = true });
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
     }

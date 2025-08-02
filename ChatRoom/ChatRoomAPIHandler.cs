@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualBasic.ApplicationServices;
+using ModelObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,10 +7,12 @@ using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using Message = ModelObjects.Message;
+using User = ModelObjects.User;
 
 namespace ChatRoom
 {
-    public static class ChatRoomApi
+    public static class ChatRoomAPIHandler
     {
         public static HttpClient Client = new HttpClient
         {
@@ -32,18 +35,10 @@ namespace ChatRoom
             return result;
         }
 
-        public static async Task<Message?> GetMessage(string chatRoomName, int index)
+        public static async Task<HashSet<Message>?> GetAllMessages(string chatRoomName)
         {
-            string path = $"GetMessage?chatRoomName={chatRoomName}&index={index}";
-            var result = await Client.GetFromJsonAsync<Message>(path);
-
-            return result;
-        }
-
-        public static async Task<List<Message>> GetAllMessages(string chatRoomName)
-        {
-            string path = "GetAllMessages";
-            var result = await Client.GetFromJsonAsync<List<Message>>(path);
+            string path = $"GetAllMessages?chatRoomName={chatRoomName}";
+            var result = await Client.GetFromJsonAsync<HashSet<Message>>(path);
 
             return result;
         }
@@ -56,10 +51,10 @@ namespace ChatRoom
             return result;
         }
 
-        public static async Task<ChatRoom> GetChatroom(string chatRoomName)
+        public static async Task<Chatroom?> GetChatroom(string chatRoomName)
         {
             string path = $"GetChatroom?chatRoomName={chatRoomName}";
-            var result = await Client.GetFromJsonAsync<ChatRoom>(path);
+            var result = await Client.GetFromJsonAsync<Chatroom>(path);
 
             return result;
         }
