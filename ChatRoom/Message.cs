@@ -11,5 +11,10 @@ namespace ChatRoom
         public required string Text { get; set; }
         public DateTime Timestamp { get; set; }
         public User? User { get; set; }
+
+        public override string ToString()
+        {
+            return $"[{Timestamp.Hour}:{Timestamp.Minute}] {User.Username}: {Text}";
+        }
     }
 }

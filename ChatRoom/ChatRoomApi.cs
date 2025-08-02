@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace ChatRoom
 {
@@ -15,34 +16,57 @@ namespace ChatRoom
             BaseAddress = new Uri("http://localhost:5150/") // Adjust the base address as needed
         };
 
-        public static async Task<User?> GetUser(string username)
+        public static async Task<User?> GetUser(string chatRoomName, string username)
         {
-            string path = $"GetUser?userName={username}";
-
+            string path = $"GetUser?chatRoomName={chatRoomName}&userName={username}";
             var result = await Client.GetFromJsonAsync<User>(path);
 
             return result;
         }
 
-        public static async Task<HttpResponseMessage> PostNewUser(string username)
+        public static async Task<HttpResponseMessage> PostNewUser(string chatRoomName, string username)
         {
-            string path = $"PostNewUser?userName={username}";
+            string path = $"PostNewUser?chatRoomName={chatRoomName}&userName={username}";
             var result = await Client.PostAsync(path, null);
-            
+
             return result;
         }
 
-        public static async Task<Message?> GetMessage(int index)
+        public static async Task<Message?> GetMessage(string chatRoomName, int index)
         {
-            string path = $"GetMessage?index={index}";
+            string path = $"GetMessage?chatRoomName={chatRoomName}&index={index}";
             var result = await Client.GetFromJsonAsync<Message>(path);
 
             return result;
         }
 
-        public static async Task<HttpResponseMessage> PostMessage(string message, string username)
+        public static async Task<List<Message>> GetAllMessages(string chatRoomName)
         {
-            string path = $"PostMessage?message={message}&username={username}";
+            string path = "GetAllMessages";
+            var result = await Client.GetFromJsonAsync<List<Message>>(path);
+
+            return result;
+        }
+
+        public static async Task<HttpResponseMessage> PostMessage(string chatRoomName, string message, string username)
+        {
+            string path = $"PostMessage?chatRoomName={chatRoomName}&message={message}&username={username}";
+            var result = await Client.PostAsync(path, null);
+
+            return result;
+        }
+
+        public static async Task<ChatRoom> GetChatroom(string chatRoomName)
+        {
+            string path = $"GetChatroom?chatRoomName={chatRoomName}";
+            var result = await Client.GetFromJsonAsync<ChatRoom>(path);
+
+            return result;
+        }
+
+        public static async Task<HttpResponseMessage> PostNewChatroom(string chatRoomName)
+        {
+            string path = $"PostNewChatroom?chatRoomName={chatRoomName}";
             var result = await Client.PostAsync(path, null);
 
             return result;
