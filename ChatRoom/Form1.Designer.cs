@@ -37,7 +37,6 @@
             ChatBox = new ListBox();
             TabControl = new TabControl();
             AddTabButton = new Button();
-            NewTabNameBox = new TextBox();
             ShowHistoryCheck = new CheckBox();
             SuspendLayout();
             // 
@@ -63,7 +62,6 @@
             // 
             // UserOptionDropdown
             // 
-            UserOptionDropdown.Enabled = false;
             UserOptionDropdown.FormattingEnabled = true;
             UserOptionDropdown.Location = new Point(12, 464);
             UserOptionDropdown.Name = "UserOptionDropdown";
@@ -101,28 +99,19 @@
             TabControl.Location = new Point(12, 37);
             TabControl.Name = "TabControl";
             TabControl.SelectedIndex = 0;
-            TabControl.Size = new Size(203, 22);
+            TabControl.Size = new Size(317, 22);
             TabControl.TabIndex = 6;
             TabControl.SelectedIndexChanged += TabControl_SelectedIndexChanged;
             // 
             // AddTabButton
             // 
-            AddTabButton.Enabled = false;
-            AddTabButton.Location = new Point(319, 35);
+            AddTabButton.Location = new Point(335, 35);
             AddTabButton.Name = "AddTabButton";
-            AddTabButton.Size = new Size(44, 23);
+            AddTabButton.Size = new Size(28, 23);
             AddTabButton.TabIndex = 7;
-            AddTabButton.Text = "New";
+            AddTabButton.Text = " +";
             AddTabButton.UseVisualStyleBackColor = true;
             AddTabButton.Click += AddTabButton_Click;
-            // 
-            // NewTabNameBox
-            // 
-            NewTabNameBox.Location = new Point(221, 36);
-            NewTabNameBox.Name = "NewTabNameBox";
-            NewTabNameBox.Size = new Size(92, 23);
-            NewTabNameBox.TabIndex = 8;
-            NewTabNameBox.TextChanged += NewTabNameBox_TextChanged;
             // 
             // ShowHistoryCheck
             // 
@@ -140,7 +129,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(375, 501);
             Controls.Add(ShowHistoryCheck);
-            Controls.Add(NewTabNameBox);
             Controls.Add(AddTabButton);
             Controls.Add(TabControl);
             Controls.Add(ChatBox);
@@ -165,7 +153,6 @@
         private ListBox ChatBox;
         private TabControl TabControl;
         private Button AddTabButton;
-        private TextBox NewTabNameBox;
         private CheckBox ShowHistoryCheck;
     }
 }

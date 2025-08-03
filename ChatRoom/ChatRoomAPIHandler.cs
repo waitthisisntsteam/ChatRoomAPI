@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Json;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
@@ -19,17 +20,17 @@ namespace ChatRoom
             BaseAddress = new Uri("http://localhost:5150/") // Adjust the base address as needed
         };
 
-        public static async Task<User?> GetUser(string chatRoomName, string username)
+        public static async Task<User?> GetUser(string username)
         {
-            string path = $"GetUser?chatRoomName={chatRoomName}&userName={username}";
+            string path = $"GetUser?userName={username}";
             var result = await Client.GetFromJsonAsync<User>(path);
 
             return result;
         }
 
-        public static async Task<HttpResponseMessage> PostNewUser(string chatRoomName, string username)
+        public static async Task<HttpResponseMessage> PostNewUser(string username, string password)
         {
-            string path = $"PostNewUser?chatRoomName={chatRoomName}&userName={username}";
+            string path = $"PostNewUser?userName={username}&password={password}";
             var result = await Client.PostAsync(path, null);
 
             return result;
@@ -62,6 +63,14 @@ namespace ChatRoom
         public static async Task<HttpResponseMessage> PostNewChatroom(string chatRoomName)
         {
             string path = $"PostNewChatroom?chatRoomName={chatRoomName}";
+            var result = await Client.PostAsync(path, null);
+
+            return result;
+        }
+
+        public static async Task<HttpResponseMessage> PostNewDirectMessages(string chatRoomName, string user1, string user2)
+        {
+            string path = $"PostNewDirectMessages?chatRoomName={chatRoomName}&user1={user1}&user2={user2}";
             var result = await Client.PostAsync(path, null);
 
             return result;
